@@ -1,5 +1,10 @@
 :root {
   --myApp-global--spacer--md: 30px;
+  --img-viewer-select-colour: #ffffff00;
+}
+
+.pf-c-data-list__item.pf-m-selected {
+  --pf-c-data-list__item--before--BackgroundColor: var(--img-viewer-select-colour);
 }
 
 .app-container {

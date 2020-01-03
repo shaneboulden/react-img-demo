@@ -22,8 +22,6 @@ import {
   DropdownPosition,            
   DropdownToggle,              
   DropdownSeparator,           
-  Flex,
-  FlexItem,
   KebabToggle,                 
   Page,
   PageHeader,
@@ -32,6 +30,8 @@ import {
   PageSidebar,
   Pagination,
   PaginationVariant,
+  Split,
+  SplitItem,
   TextContent,
   Text,
   Toolbar,
@@ -48,7 +48,6 @@ import {
 import { GlobeAsiaIcon } from '@patternfly/react-icons';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import ExifReader from 'exifreader';
 
 class Details extends React.Component {
   constructor(props) {
@@ -74,15 +73,16 @@ class Details extends React.Component {
       expanded: [],
       opened: [],
       dataitems: [],
+      modified_times: {},
       data_array: data_array,
       page: 1,
       perPage: 10
     };
-    console.log(this.state.data_array);
   }
 
   componentDidMount() {
     var local_data = {};
+    var modified_times = {};
     this.state.images.forEach(image => {
       var exif_data = {}
       var columns = []
@@ -107,10 +107,8 @@ class Details extends React.Component {
        columns.push("EXIF key")
        columns.push("EXIF value")
 
-      console.log(rows);
-      local_data[image] = [columns,rows];
+       local_data[image] = [columns,rows];
     })
-    console.log('image object: '+JSON.stringify(local_data));
     this.setState({ data_array: local_data });
   };
 
@@ -118,22 +116,29 @@ class Details extends React.Component {
 
       return(
         <div>
-          <img src={`http://localhost:8000/images/${image}.jpg`} height="200" width="200"/>
-          <Table
-              aria-label="Compact Table with borderless rows"
-              variant={TableVariant.compact}
-              borders={false}
-              cells={this.state.data_array[image][0]}
-              rows={this.state.data_array[image][1]}
-            >
-              <TableHeader />
-              <TableBody />
-            </Table>
+          <Split gutter="md">
+            <SplitItem>
+              <img src={`http://localhost:8000/images/${image}.jpg`} height="200" width="200"/>
+            </SplitItem>
+            <SplitItem>
+            <Table
+                aria-label="Compact Table with borderless rows"
+                variant={TableVariant.compact}
+                borders={false}
+                cells={this.state.data_array[image][0]}
+                rows={this.state.data_array[image][1]}
+              >
+                <TableHeader />
+                <TableBody />
+              </Table>
+            </SplitItem>
+          </Split>
         </div>
       )
   };
 
   render() {
+
     const toggle = id => {
       const expanded = this.state.expanded;
       const index = expanded.indexOf(id);
@@ -152,7 +157,7 @@ class Details extends React.Component {
 
     return(
       <React.Fragment>
-        <DataList aria-label="Expandable data list example">
+        <DataList aria-label="Expandable data list example" >
           { this.state.images.map((image,index) => {
             return (
               <DataListItem aria-labelledby={`ex-item${index}`} key={index} isExpanded={this.state.expanded.includes(`ex-toggle${index}`)}>
@@ -171,6 +176,9 @@ class Details extends React.Component {
                   <DataListCell key="primary content">
                     <div id={`ex-item${index}`}>{image}</div>
                   </DataListCell>,
+                  <DataListCell>
+                    <div>{this.state.data_array[image][1][5] !== 'undefined'}</div>
+                  </DataListCell>
                 ]}
               />,
 
@@ -184,7 +192,6 @@ class Details extends React.Component {
                   position={DropdownPosition.right}
                   isOpen={this.state.opened.includes(`ex-dropdown${index}`)}
                   id={`ex-dropdown${index}`}
-                  onSelect={this.onSelect}
                   toggle={<KebabToggle onToggle={() => open(`ex-dropdown${index}`)} />}
 
                   dropdownItems={[
