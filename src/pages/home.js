@@ -164,8 +164,8 @@ class Home extends React.Component {
           <PageSection>
             <Bullseye>
             <div style={divStyle}>
-              <ReactCompareImage leftImage="http://localhost:8000/images/pia21455.jpg" 
-                rightImage="http://localhost:8000/images/pia11705.jpg" />
+              <ReactCompareImage leftImage="http://python-exif-react-img-lts.apps.shared-rhpds.rhpds.openshift.opentlc.com/images/pia21455.jpg" 
+                rightImage="http://python-exif-react-img-lts.apps.shared-rhpds.rhpds.openshift.opentlc.com/images/pia11705.jpg" />
             </div>
           </Bullseye>
           </PageSection>

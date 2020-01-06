@@ -88,7 +88,7 @@ class Details extends React.Component {
       var columns = []
       var rows = []
 
-      axios.get(`http://localhost:8000/exif/${image}.js`)
+      axios.get(`http://python-exif-react-img-lts.apps.shared-rhpds.rhpds.openshift.opentlc.com/exif/${image}.js`)
         .then(res => {
             for (var key in res.data) {
               rows.push([key,res.data[key]])
@@ -118,7 +118,7 @@ class Details extends React.Component {
         <div>
           <Split gutter="md">
             <SplitItem>
-              <img src={`http://localhost:8000/images/${image}.jpg`} height="200" width="200"/>
+              <img src={`http://python-exif-react-img-lts.apps.shared-rhpds.rhpds.openshift.opentlc.com/images/${image}.jpg`} height="200" width="200"/>
             </SplitItem>
             <SplitItem>
             <Table
