@@ -36,15 +36,13 @@ import spacingStyles from '@patternfly/patternfly/utilities/Spacing/spacing.css'
 import { css } from '@patternfly/react-styles';
 import { BellIcon, CogIcon } from '@patternfly/react-icons';
 import { ToastContainer, toast } from 'react-toastify';
-//import brandImg from './l_pf-reverse-164x11.png';
-//import avatarImg from './img_avatar.svg';
 
 import xs from '@assets/images/pfbg_576.jpg';
 import xs2x from '@assets/images/pfbg_576@2x.jpg';
 import sm from '@assets/images/pfbg_768.jpg';
 import sm2x from '@assets/images/pfbg_768@2x.jpg';
 import lg from '@assets/images/pfbg_2000.jpg';
-//import filter from '@assets/images/background-filter.svg';
+import filter from '@assets/background-filter.svg';
 
 class PageLayoutSimpleNav extends React.Component {
 
