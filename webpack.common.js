@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -14,15 +13,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(tsx|ts)?$/,
-        use: [
-          {
-            loader: 'ts-loader'
-          }
-        ]
-      },
-      {
-        test: /\.(svg|ttf|eot|woff|woff2)$/,
+        test: /\.(ttf|eot|woff|woff2)$/,
         use: {
           loader: 'file-loader',
           options: {
@@ -45,7 +36,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 5000,
-              //outputPath: 'images',
+              outputPath: 'images',
               name: '[name].[ext]',
             }
           }
@@ -53,29 +44,10 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 5000,
-              outputPath: 'svgs',
-              name: '[name].[ext]',
-            }
-          }
-        ],
-        include: input => input.indexOf('background-filter.svg') > 1
-      },
-      {
-        test: /\.svg$/,
         use: {
           loader: 'svg-url-loader',
           options: {}
         },
-        include: function(input) {
-          // only process SVG modules with this loader if they live under a 'bgimages' directory
-          // this is primarily useful when applying a CSS background using an SVG
-          return input.indexOf('bgimages') > -1;
-        }
       },
       {
         test: /\.svg$/,
@@ -95,15 +67,12 @@ module.exports = {
     ]
   },
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'app.bundle.js',
+    path: path.resolve(__dirname, './build')
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json'],
-    plugins: [
-      new TsconfigPathsPlugin({
-        configFile: path.resolve(__dirname, './tsconfig.json')
-      })
-    ]
+    alias: {
+      '@assets': path.resolve(__dirname, './build'),
+    }
   },
 };

@@ -1,13 +1,13 @@
 FROM registry.redhat.io/ubi8
-
-COPY dist/ /var/www/html/
+COPY build/ /var/www/html/
 
 RUN yum update --disableplugin=subscription-manager -y && rm -rf /var/cache/yum
 RUN yum install --disableplugin=subscription-manager httpd -y && rm -rf /var/cache/yum
 
-RUN sed -i 's/Listen 80/Listen 8080/' /etc/httpd/conf/httpd.conf \
-  && chgrp -R 0 /var/log/httpd /var/run/httpd \
-  && chmod -R g=u /var/log/httpd /var/run/httpd
+COPY conf/httpd.conf /etc/httpd/conf/httpd.conf
+
+RUN chgrp -R 0 /var/log/httpd /var/run/httpd /etc/httpd /var/www/html \
+  && chmod -R g=u /var/log/httpd /var/run/httpd /etc/httpd /var/www/html 
 
 EXPOSE 8080
 USER 1001
