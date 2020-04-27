@@ -59,6 +59,9 @@ import sm2x from '@assets/images/pfbg_768@2x.jpg';
 import lg from '@assets/images/pfbg_2000.jpg';
 import filter from '@assets/background-filter.svg';
 
+import leftImage from '../../srv_images/pia21455.jpg';
+import rightImage from '../../srv_images/pia11705.jpg';
+
 const cStyle={ 
   textAlign: 'center'
 };
@@ -164,8 +167,7 @@ class Home extends React.Component {
           <PageSection>
             <Bullseye>
             <div style={divStyle}>
-              <ReactCompareImage leftImage="https://python-exif-react-img-lts.apps.shared-rhpds.rhpds.openshift.opentlc.com/images/pia21455.jpg" 
-                rightImage="https://python-exif-react-img-lts.apps.shared-rhpds.rhpds.openshift.opentlc.com/images/pia11705.jpg" />
+              <ReactCompareImage leftImage={leftImage} rightImage={rightImage} />
             </div>
           </Bullseye>
           </PageSection>

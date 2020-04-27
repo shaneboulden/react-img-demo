@@ -88,6 +88,8 @@
     "@patternfly/react-table": "^2.1.6",
     "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
+    "compact-json-loader": "^0.1.1",
+    "json-loader": "^0.5.7",
     "react-compare-image": "^2.0.3",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.3.0",
