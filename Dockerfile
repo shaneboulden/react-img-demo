@@ -1,8 +1,9 @@
-FROM registry.redhat.io/ubi8
+FROM registry.access.redhat.com/ubi9-minimal:9.2-750.1697625013
 COPY build/ /var/www/html/
 
-RUN yum update --disableplugin=subscription-manager -y && rm -rf /var/cache/yum
-RUN yum install --disableplugin=subscription-manager httpd -y && rm -rf /var/cache/yum
+RUN microdnf update --disableplugin=subscription-manager -y \ 
+    && microdnf install --disableplugin=subscription-manager httpd -y \
+    && rm -rf /var/cache/yum/*
 
 COPY conf/httpd.conf /etc/httpd/conf/httpd.conf
 
